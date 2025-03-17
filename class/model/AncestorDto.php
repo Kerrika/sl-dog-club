@@ -6,15 +6,16 @@ readonly class AncestorDto
 {
     function __construct(
         public int $id,
-        public BreedDto $breed,
-        public ?AnimalDto $animal,
-        public Sex $sex,
         public string $name,
         public string $registrationNumber,
-        public AncestorDto $sire,
-        public AncestorDto $dam,
-        public LitterDto $litter
+        public int $sireId,
+        public int $damId,
     )
-    {        
+    {
+    }
+
+    static function fromTableRow(array $tableRow): self
+    {
+        return new AncestorDto($tableRow['id'], $tableRow['name'], $tableRow['registrationNumber'], $tableRow['sireId'], $tableRow['damId']);
     }
 }
