@@ -5,7 +5,7 @@ namespace SunlightExtend\DogClub\Repository;
 use SunlightExtend\DogClub\Model\Entity\Field\FieldValueEntity;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
-class FieldValueRepository extends Repository
+class FieldValueRepository extends RepositoryBase
 {
     use SingletonTrait;
 
