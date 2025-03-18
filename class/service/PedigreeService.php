@@ -2,15 +2,15 @@
 
 namespace SunlightExtend\DogClub\Service;
 
-use SunlightExtend\DogClub\Repository\AncestorRepository;
+use SunlightExtend\DogClub\Repository\AnimalRepository;
 
 readonly class PedigreeService
 {
-    private AncestorRepository $ancestorRepository;
+    private AnimalRepository $AnimalRepository;
 
     private function __construct()
     {
-        $this->ancestorRepository = AncestorRepository::getInstance();
+        $this->AnimalRepository = AnimalRepository::getInstance();
     }
 
     static function getInstance(): self
@@ -19,12 +19,12 @@ readonly class PedigreeService
         return $instance ??= new self();
     }
 
-    /** @return array<int, array<int, AncestorDto>> */
+    /** @return array<int, array<int, AnimalEntity>> */
     function getPedigree(int $id, int $generationCount): ?array
     {
         $pedigree = array();
 
-        $animal = $this->ancestorRepository->getAncestor($id);
+        $animal = $this->AnimalRepository->getById($id);
         if (!$animal)
         {
             return null;
@@ -38,8 +38,8 @@ readonly class PedigreeService
 
             foreach ($currentGen as $ancestor)
             {
-                $generation[] = $this->ancestorRepository->getAncestor($ancestor?->sireId);
-                $generation[] = $this->ancestorRepository->getAncestor($ancestor?->damId);
+                $generation[] = $this->AnimalRepository->getById($ancestor?->sireId);
+                $generation[] = $this->AnimalRepository->getById($ancestor?->damId);
             }
 
             $currentGen = $generation;
