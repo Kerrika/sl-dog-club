@@ -3,6 +3,7 @@
 namespace SunlightExtend\DogClub\Model\Entity;
 
 use DateTime;
+use SunlightExtend\DogClub\Model\Enum\AnimalStatus;
 use SunlightExtend\DogClub\Model\Enum\Sex;
 
 readonly class AnimalEntity implements IEntity
@@ -12,6 +13,7 @@ readonly class AnimalEntity implements IEntity
         public string $name,
         public Sex $sex,
         public string $registrationNumber,
+        public AnimalStatus $status,
         public ?int $sireId,
         public ?int $damId,
         public DateTime $dateOfBirth,
@@ -23,7 +25,7 @@ readonly class AnimalEntity implements IEntity
 
     static function getPropertyNames(): string
     {
-        return 'id, name, sex, registrationNumber, sireId, damId, dateOfBirth, breedId, litterId';
+        return 'id, name, sex, registrationNumber, animalStatus, sireId, damId, dateOfBirth, breedId, litterId';
     }
 
     function toArray() : array
@@ -33,6 +35,7 @@ readonly class AnimalEntity implements IEntity
             'name' => $this->name,
             'sex' => $this->sex->value,
             'registrationNumber' => $this->registrationNumber,
+            'animalStatus' => $this->status->value,
             'sireId' => $this->sireId,
             'damId' => $this->damId,
             'dateOfBirth' => $this->dateOfBirth,
