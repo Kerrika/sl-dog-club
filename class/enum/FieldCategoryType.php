@@ -2,8 +2,8 @@
 
 namespace SunlightExtend\DogClub\Model\Enum;
 
-enum FieldType : int
+enum FieldCategoryType : int
 {
-    case Text = 0;
-    case Link = 1;
+    case Animal = 0;
+    case Owner = 1;
 }

@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace SunlightExtend\DogClub\Repository;
+namespace SunlightExtend\DogClub\Repository\Field;
 
 use SunlightExtend\DogClub\Model\Entity\Field\FieldCategoryEntity;
+use SunlightExtend\DogClub\Repository\RepositoryBase;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 class FieldCategoryRepository extends RepositoryBase
@@ -14,7 +15,7 @@ class FieldCategoryRepository extends RepositoryBase
         parent::__construct('fieldCategory');
     }
 
-    function getById(?int $id): ?FieldCategoryEntity
+    function getById(int $id): ?FieldCategoryEntity
     {
         $row = $this->getRowById($id, FieldCategoryEntity::getPropertyNames());
 

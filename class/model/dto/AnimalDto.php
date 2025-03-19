@@ -21,7 +21,7 @@ readonly class AnimalDto
         /** @var LitterEntity[] */
         public array $litters,
         /** @var FieldValueDto[] */
-        public array $fieldValues,
+        public array $additionalFields,
         /** @var TrialResultDto[] */
         public array $trialResults,
         /** @var array<int, array<int, AnimalEntity>> */

@@ -3,23 +3,19 @@
 namespace SunlightExtend\DogClub\Service;
 
 use SunlightExtend\DogClub\Repository\AnimalRepository;
+use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 readonly class PedigreeService
 {
+    use SingletonTrait;
+
     private AnimalRepository $AnimalRepository;
 
     private function __construct()
     {
         $this->AnimalRepository = AnimalRepository::getInstance();
     }
-
-    static function getInstance(): self
-    {
-        static $instance;
-        return $instance ??= new self();
-    }
-
-    /** @return array<int, array<int, AnimalEntity>> */
+    /** @return AnimalEntity[][] */
     function getPedigree(int $id, int $generationCount): ?array
     {
         $pedigree = array();
@@ -38,8 +34,8 @@ readonly class PedigreeService
 
             foreach ($currentGen as $ancestor)
             {
-                $generation[] = $this->AnimalRepository->getById($ancestor?->sireId);
-                $generation[] = $this->AnimalRepository->getById($ancestor?->damId);
+                $generation[] = $ancestor?->sireId !== null ? $this->AnimalRepository->getById($ancestor?->sireId) : null;
+                $generation[] = $ancestor?->sireId !== null ? $this->AnimalRepository->getById($ancestor?->damId) : null;
             }
 
             $currentGen = $generation;

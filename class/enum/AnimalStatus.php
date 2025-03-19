@@ -7,5 +7,5 @@ enum AnimalStatus : int
     case External = 0;
     case Internal = 1;
     case Approved = 2;
-    case Obsolete = 3;
+    case Retired = 3;
 }

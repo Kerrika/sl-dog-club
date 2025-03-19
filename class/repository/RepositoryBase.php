@@ -31,13 +31,13 @@ abstract class RepositoryBase
         DB::delete($this->dbName, 'id=' . DB::val($id));
     }
 
-    protected function getRowById(int $id, string $properties): ?array
+    protected function getRowById(?int $id, string $properties): ?array
     {
         if ($id === null)
         {
             return null;
         }
-        
+
         $row = DB::queryRow('SELECT ' . $properties . ' FROM ' . $this->dbName . ' WHERE id=' . DB::val($id));
 
         return $row === false ? null : $row;
@@ -51,5 +51,10 @@ abstract class RepositoryBase
         }
 
         return DB::queryRows('SELECT ' . $properties . ' FROM ' . $this->dbName . ' WHERE id IN ' . DB::idtList($ids));
+    }
+
+    protected function getRowsByColumn(string $property, mixed $value, string $properties): array
+    {
+        return DB::queryRows('SELECT ' . $properties . ' FROM ' . $this->dbName . ' WHERE ' . $property . ' = ' . DB::val($value));
     }
 }

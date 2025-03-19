@@ -5,7 +5,7 @@ namespace SunlightExtend\DogClub\Repository;
 use SunlightExtend\DogClub\Model\Entity\BreedEntity;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
-class LitterRepository extends RepositoryBase
+class BreedRepository extends RepositoryBase
 {
     use SingletonTrait;
 

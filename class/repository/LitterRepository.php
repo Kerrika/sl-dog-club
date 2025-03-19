@@ -3,6 +3,7 @@
 namespace SunlightExtend\DogClub\Repository;
 
 use SunlightExtend\DogClub\Model\Entity\LitterEntity;
+use SunlightExtend\DogClub\Model\Enum\Sex;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 class LitterRepository extends RepositoryBase
@@ -25,6 +26,23 @@ class LitterRepository extends RepositoryBase
     function getByIds(array $ids): array
     {
         $rows = $this->getRowsByIds($ids, LitterEntity::getPropertyNames());
+
+        $list = array();
+
+        foreach ($rows as $row)
+        {
+            $list[] = new LitterEntity(...$row);
+        }
+
+        return $list;
+    }
+
+    /** @return LitterEntity[] */
+    function getByAnimalId(Sex $sex, int $id): array
+    {
+        $columnName = $sex === Sex::Male ? "sireId" : "damId";
+
+        $rows = $this->getRowsByColumn($columnName, $id, LitterEntity::getPropertyNames());
 
         $list = array();
 

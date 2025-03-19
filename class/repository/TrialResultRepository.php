@@ -5,7 +5,7 @@ namespace SunlightExtend\DogClub\Repository;
 use SunlightExtend\DogClub\Model\Entity\TrialResultEntity;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
-class LitterRepository extends RepositoryBase
+class TrialResultRepository extends RepositoryBase
 {
     use SingletonTrait;
 
@@ -14,7 +14,7 @@ class LitterRepository extends RepositoryBase
         parent::__construct('trialResult');
     }
 
-    function getById(?int $id): ?TrialResultEntity
+    function getById(int $id): ?TrialResultEntity
     {
         $row = $this->getRowById($id, TrialResultEntity::getPropertyNames());
 
@@ -25,6 +25,21 @@ class LitterRepository extends RepositoryBase
     function getByIds(array $ids): array
     {
         $rows = $this->getRowsByIds($ids, TrialResultEntity::getPropertyNames());
+
+        $list = array();
+
+        foreach ($rows as $row)
+        {
+            $list[] = new TrialResultEntity(...$row);
+        }
+
+        return $list;
+    }
+
+    /** @return TrialResultEntity[] */
+    function getByAnimalId(int $id): array
+    {
+        $rows = $this->getRowsByColumn('animalId', $id, TrialResultEntity::getPropertyNames());
 
         $list = array();
 

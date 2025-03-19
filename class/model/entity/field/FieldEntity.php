@@ -3,7 +3,7 @@
 namespace SunlightExtend\DogClub\Model\Entity\Field;
 
 use SunlightExtend\DogClub\Model\Entity\IEntity;
-use SunlightExtend\DogClub\Model\Enum\FieldType;
+use SunlightExtend\DogClub\Model\Enum\FieldValueType;
 
 readonly class FieldEntity implements IEntity
 {
@@ -12,14 +12,15 @@ readonly class FieldEntity implements IEntity
         public string $name,
         public string $nameLocal,
         public int $categoryId,
-        public FieldType $type
+        public FieldValueType $type,
+        public bool $isBuiltIn
     )
     {
     }
 
     static function getPropertyNames(): string
     {
-        return "id, name, nameLocal, categoryId, type";
+        return "id, name, nameLocal, categoryId, type, isBuiltIn";
     }
 
     public function toArray() : array
@@ -29,7 +30,8 @@ readonly class FieldEntity implements IEntity
             'name' => $this->name,
             'nameLocal' => $this->nameLocal,
             'categoryId' => $this->categoryId,
-            'type' => $this->type->value
+            'type' => $this->type->value,
+            'isBuiltIn' => $this->isBuiltIn
         ];
     }
 }

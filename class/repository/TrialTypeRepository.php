@@ -5,7 +5,7 @@ namespace SunlightExtend\DogClub\Repository;
 use SunlightExtend\DogClub\Model\Entity\TrialTypeEntity;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
-class LitterRepository extends RepositoryBase
+class TrialTypeRepository extends RepositoryBase
 {
     use SingletonTrait;
 
@@ -14,7 +14,7 @@ class LitterRepository extends RepositoryBase
         parent::__construct('trialType');
     }
 
-    function getById(?int $id): ?TrialTypeEntity
+    function getById(int $id): ?TrialTypeEntity
     {
         $row = $this->getRowById($id, TrialTypeEntity::getPropertyNames());
 

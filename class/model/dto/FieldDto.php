@@ -9,9 +9,9 @@ use SunlightExtend\DogClub\Model\Entity\Field\FieldValueEntity;
 readonly class FieldValueDto
 {
     function __construct(
+        public FieldValueEntity $fieldValue,
         public FieldEntity $field,
-        public FieldCategoryEntity $fieldCategory,
-        public FieldValueEntity $fieldValue
+        public FieldCategoryEntity $fieldCategory
     )
     {}
 }

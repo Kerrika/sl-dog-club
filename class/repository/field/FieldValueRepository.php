@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace SunlightExtend\DogClub\Repository;
+namespace SunlightExtend\DogClub\Repository\Field;
 
 use SunlightExtend\DogClub\Model\Entity\Field\FieldValueEntity;
+use SunlightExtend\DogClub\Repository\RepositoryBase;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 class FieldValueRepository extends RepositoryBase
@@ -14,7 +15,7 @@ class FieldValueRepository extends RepositoryBase
         parent::__construct('fieldValue');
     }
 
-    function getById(?int $id): ?FieldValueEntity
+    function getById(int $id): ?FieldValueEntity
     {
         $row = $this->getRowById($id, FieldValueEntity::getPropertyNames());
 
@@ -25,6 +26,21 @@ class FieldValueRepository extends RepositoryBase
     function getByIds(array $ids): array
     {
         $rows = $this->getRowsByIds($ids, FieldValueEntity::getPropertyNames());
+
+        $list = array();
+
+        foreach ($rows as $row)
+        {
+            $list[] = new FieldValueEntity(...$row);
+        }
+
+        return $list;
+    }
+
+    /** @return FieldValueEntity[] */
+    function getByAnimalId(int $id): array
+    {
+        $rows = $this->getRowsByColumn('animalId', $id, FieldValueEntity::getPropertyNames());
 
         $list = array();
 
