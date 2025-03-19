@@ -21,12 +21,26 @@ class FieldRepository extends RepositoryBase
 
         return $row === null ? null : new FieldEntity(...$row);
     }
+
+    /** @return FieldEntity[] */
+    function getAll(): array
+    {
+        $rows = $this->getAllRows(FieldEntity::getPropertyNames());
+
+        return $this->toEntities($rows);
+    }
     
     /** @return FieldEntity[] */
     function getByIds(array $ids): array
     {
         $rows = $this->getRowsByIds($ids, FieldEntity::getPropertyNames());
 
+        return $this->toEntities($rows);
+    }
+
+    /** @return FieldEntity[] */
+    private function toEntities(array $rows): array
+    {        
         $list = array();
 
         foreach ($rows as $row)

@@ -23,12 +23,17 @@ abstract class RepositoryBase
 
     function update(int $id, IEntity $entity): void
     {
-        DB::update($this->dbName, 'id=' . DB::val($id), $entity->toArray());
+        DB::update($this->dbName, 'id' . DB::equal($id), $entity->toArray());
     }
 
     function delete(int $id): void
     {
         DB::delete($this->dbName, 'id=' . DB::val($id));
+    }
+
+    protected function getAllRows(string $properties): array
+    {
+        return DB::queryRow('SELECT ' . $properties . ' FROM ' . $this->dbName);
     }
 
     protected function getRowById(?int $id, string $properties): ?array

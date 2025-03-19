@@ -35,4 +35,25 @@ class AnimalRepository extends RepositoryBase
 
         return $list;
     }
+
+    /** @return AnimalEntity[] */
+    function getApprovedByBreedId(int $id): array
+    {
+        return $this->getByProperty('breedId', $id);
+    }
+
+    /** @return AnimalEntity[] */
+    private function getByProperty(string $property, mixed $value): array
+    {
+        $rows = $this->getRowsByColumn($property, $value, AnimalEntity::getPropertyNames());
+
+        $list = array();
+
+        foreach ($rows as $row)
+        {
+            $list[] = new AnimalEntity(...$row);
+        }
+
+        return $list;
+    }
 }

@@ -7,6 +7,7 @@ use SunlightExtend\DogClub\Model\Entity\IEntity;
 readonly class FieldValueEntity implements IEntity
 {
     function __construct(
+        public int $id,
         public int $fieldId,
         public int $animalId,
         public string $value,
@@ -17,12 +18,13 @@ readonly class FieldValueEntity implements IEntity
 
     static function getPropertyNames(): string
     {
-        return "fieldId, animalId, value, valueLocal";
+        return "id, fieldId, animalId, value, valueLocal";
     }
 
     public function toArray() : array
     {
         return [
+            'id' => $this->id,
             'fieldId' => $this->fieldId,
             'animalId' => $this->animalId,
             'value' => $this->value,

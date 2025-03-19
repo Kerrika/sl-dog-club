@@ -40,9 +40,27 @@ class LitterRepository extends RepositoryBase
     /** @return LitterEntity[] */
     function getByAnimalId(Sex $sex, int $id): array
     {
-        $columnName = $sex === Sex::Male ? "sireId" : "damId";
+        $property = $sex === Sex::Male ? "sireId" : "damId";
 
-        $rows = $this->getRowsByColumn($columnName, $id, LitterEntity::getPropertyNames());
+        return $this->getByProperty($property, $id);
+    }
+
+    /** @return LitterEntity[] */
+    function getByBreedId(int $id): array
+    {
+        return $this->getByProperty('breedId', $id);
+    }
+
+    /** @return LitterEntity[] */
+    function getByBreederId(int $id): array
+    {
+        return $this->getByProperty('breederId', $id);
+    }
+
+    /** @return LitterEntity[] */
+    private function getByProperty(string $property, mixed $value): array
+    {
+        $rows = $this->getRowsByColumn($property, $value, LitterEntity::getPropertyNames());
 
         $list = array();
 

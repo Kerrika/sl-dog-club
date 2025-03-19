@@ -10,6 +10,8 @@ readonly class BreederDto
         public BreederEntity $breeder,
         /** @var LitterEntity[] */
         public array $litters,
+        /** @var BreedEntity[] */
+        public array $breeds
     )
     {}
 }

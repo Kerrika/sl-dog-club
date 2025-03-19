@@ -35,4 +35,25 @@ class BreederRepository extends RepositoryBase
 
         return $list;
     }
+
+    /** @return BreederEntity[] */
+    function getByBreedId(int $id): array
+    {
+        return $this->getByProperty('breedId', $id);
+    }
+
+    /** @return BreederEntity[] */
+    private function getByProperty(string $property, mixed $value): array
+    {
+        $rows = $this->getRowsByColumn($property, $value, BreederEntity::getPropertyNames());
+
+        $list = array();
+
+        foreach ($rows as $row)
+        {
+            $list[] = new BreederEntity(...$row);
+        }
+
+        return $list;
+    }
 }

@@ -15,6 +15,13 @@ class FieldCategoryRepository extends RepositoryBase
         parent::__construct('fieldCategory');
     }
 
+    function getAll(): array
+    {
+        $rows = $this->getAllRows(FieldCategoryEntity::getPropertyNames());
+
+        return $this->toEntities($rows);
+    }
+
     function getById(int $id): ?FieldCategoryEntity
     {
         $row = $this->getRowById($id, FieldCategoryEntity::getPropertyNames());
@@ -27,6 +34,12 @@ class FieldCategoryRepository extends RepositoryBase
     {
         $rows = $this->getRowsByIds($ids, FieldCategoryEntity::getPropertyNames());
 
+        return $this->toEntities($rows);
+    }
+
+    /** @return FieldCategoryEntity[] */
+    private function toEntities(array $rows): array
+    {        
         $list = array();
 
         foreach ($rows as $row)

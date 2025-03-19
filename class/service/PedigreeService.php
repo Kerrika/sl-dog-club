@@ -21,7 +21,8 @@ readonly class PedigreeService
         $pedigree = array();
 
         $animal = $this->AnimalRepository->getById($id);
-        if (!$animal)
+        
+        if ($animal === null)
         {
             return null;
         }

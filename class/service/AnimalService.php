@@ -20,7 +20,7 @@ readonly class AnimalService
     private BreederRepository $breederRepository;
     private LitterRepository $litterRepository;
 
-    private FieldValueService $fieldService;
+    private FieldService $fieldService;
     private TrialResultService $trialResultService;
     private PedigreeService $pedigreeService;
 
@@ -32,19 +32,16 @@ readonly class AnimalService
         $this->breederRepository = BreederRepository::getInstance();
         $this->litterRepository = LitterRepository::getInstance();
 
-        $this->fieldService = FieldValueService::getInstance();
+        $this->fieldService = FieldService::getInstance();
         $this->trialResultService = TrialResultService::getInstance();
         $this->pedigreeService = PedigreeService::getInstance();
     }
     
-    /** @return AnimalDto[] */
     function getAnimal(int $id, $generationCount = 4): ?AnimalDto
     {
-        $pedigree = array();
-
         $animal = $this->animalRepository->getById($id);
 
-        if (!$animal)
+        if ($animal === null)
         {
             return null;
         }
