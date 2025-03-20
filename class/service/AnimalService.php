@@ -21,7 +21,7 @@ readonly class AnimalService
     private LitterRepository $litterRepository;
 
     private FieldService $fieldService;
-    private TrialResultService $trialResultService;
+    private TrialService $trialService;
     private PedigreeService $pedigreeService;
 
     private function __construct()
@@ -33,7 +33,7 @@ readonly class AnimalService
         $this->litterRepository = LitterRepository::getInstance();
 
         $this->fieldService = FieldService::getInstance();
-        $this->trialResultService = TrialResultService::getInstance();
+        $this->trialService = TrialService::getInstance();
         $this->pedigreeService = PedigreeService::getInstance();
     }
     
@@ -52,15 +52,15 @@ readonly class AnimalService
         $dam = $this->animalRepository->getById($animal->damId);
         
         $owner = $this->ownerRepository->getById($animal->ownerId);
-        $breeder = $this->ownerRepository->getById($animal->breederId);
+        $breeder = $this->breederRepository->getById($animal->breederId);
 
         $litter = $this->litterRepository->getById($animal->litterId);
         $litters = $this->litterRepository->getByAnimalId($animal->sex, $id);
 
         $fieldValues = $this->fieldService->getFieldValues($id);
-        $trialResults = $this->trialResultService->getTrialResults($id);
+        $trialResults = $this->trialService->getTrialResults($id);
 
-        $pedigree = $this->pedigreeService->getPedigree($id, $generationCount);
+        $pedigree = $this->pedigreeService->getPedigreeForAnimal($id, $generationCount);
 
         $dto = new AnimalDto($animal, $breed, $sire, $dam, $owner, $breeder, $litter, $litters, $fieldValues, $trialResults, $pedigree);
 

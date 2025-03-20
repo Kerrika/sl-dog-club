@@ -7,7 +7,7 @@ use SunlightExtend\DogClub\Repository\TrialResultRepository;
 use SunlightExtend\DogClub\Repository\TrialTypeRepository;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
-readonly class TrialResultService
+readonly class TrialService
 {
     use SingletonTrait;
 
@@ -19,6 +19,12 @@ readonly class TrialResultService
         $this->trialResultRepository = TrialResultRepository::getInstance();
         $this->trialTypeRepository = TrialTypeRepository::getInstance();
     }
+
+    /** @return TrialTypeEntity[] */
+    function getTrialTypes(): array
+    {
+        return $this->trialTypeRepository->getAll();
+    }
     
     /** @return TrialResultDto[] */
     function getTrialResults(int $animalId): array
@@ -28,7 +34,7 @@ readonly class TrialResultService
 
         $trialTypes = $this->trialTypeRepository->getByIds($trialTypeIds);
 
-        $list = array();
+        $list =[];
 
         foreach ($trialResults as $trialResult)
         {

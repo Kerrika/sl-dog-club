@@ -22,11 +22,25 @@ class TrialTypeRepository extends RepositoryBase
     }
 
     /** @return TrialTypeEntity[] */
+    function getAll(): array
+    {
+        $rows = $this->getAllRows(TrialTypeEntity::getPropertyNames());
+
+        return $this->toEntities($rows);
+    }
+
+    /** @return TrialTypeEntity[] */
     function getByIds(array $ids): array
     {
         $rows = $this->getRowsByIds($ids, TrialTypeEntity::getPropertyNames());
 
-        $list = array();
+        return $this->toEntities($rows);
+    }
+
+    /** @return TrialTypeEntity[] */
+    private function toEntities(array $rows): array
+    {        
+        $list =[];
 
         foreach ($rows as $row)
         {

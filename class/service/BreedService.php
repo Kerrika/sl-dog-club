@@ -25,7 +25,14 @@ readonly class BreedService
         $this->breederRepository = BreederRepository::getInstance();
         $this->litterRepository = LitterRepository::getInstance();
     }
+
+    /** @return BreedEntity[] */
+    function getBreeds(): array
+    {
+        return $this->breedRepository->getAll();
+    }
     
+    /** @return BreedDto[] */
     function getBreed(int $id): ?BreedDto
     {
         $breed = $this->breedRepository->getById($id);

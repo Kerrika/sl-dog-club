@@ -38,7 +38,7 @@ readonly class FieldService
 
         $fieldCategories = $this->fieldCategoryRepository->getByIds($fieldCategoryIds);
         
-        $list = array();
+        $list =[];
 
         foreach ($fields as $field)
         {
@@ -61,7 +61,7 @@ readonly class FieldService
 
         $fieldCategories = $this->fieldCategoryRepository->getByIds($fieldCategoryIds);
 
-        $list = array();
+        $list =[];
 
         foreach ($fieldValues as $fieldValue)
         {

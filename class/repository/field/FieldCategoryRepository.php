@@ -40,7 +40,7 @@ class FieldCategoryRepository extends RepositoryBase
     /** @return FieldCategoryEntity[] */
     private function toEntities(array $rows): array
     {        
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {

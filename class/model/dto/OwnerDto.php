@@ -11,9 +11,9 @@ readonly class OwnerDto
         public OwnerEntity $owner,
         public BreederEntity $breeder,
         /** @var AnimalEntity[] */
-        public array $animals,
-        /** @var LitterEntity[] */
-        public array $litters,
+        public array $approvedAnimals,
+        /** @var BreedEntity[] */
+        public array $breeds
     )
     {}
 }

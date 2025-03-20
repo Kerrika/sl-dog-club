@@ -26,7 +26,7 @@ class OwnerRepository extends RepositoryBase
     {
         $rows = $this->getRowsByIds($ids, OwnerEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {

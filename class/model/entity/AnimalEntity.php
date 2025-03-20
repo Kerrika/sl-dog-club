@@ -27,7 +27,7 @@ readonly class AnimalEntity implements IEntity
 
     static function getPropertyNames(): string
     {
-        return 'id, name, sex, registrationNumber, animalStatus, sireId, damId, dateOfBirth, breedId, ownerId, breederId, litterId';
+        return 'id, name, sex, registrationNumber, status, sireId, damId, dateOfBirth, breedId, ownerId, breederId, litterId';
     }
 
     function toArray() : array
@@ -37,7 +37,7 @@ readonly class AnimalEntity implements IEntity
             'name' => $this->name,
             'sex' => $this->sex->value,
             'registrationNumber' => $this->registrationNumber,
-            'animalStatus' => $this->status->value,
+            'status' => $this->status->value,
             'sireId' => $this->sireId,
             'damId' => $this->damId,
             'dateOfBirth' => $this->dateOfBirth,

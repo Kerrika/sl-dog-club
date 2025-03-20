@@ -26,7 +26,7 @@ class TrialResultRepository extends RepositoryBase
     {
         $rows = $this->getRowsByIds($ids, TrialResultEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {
@@ -41,7 +41,7 @@ class TrialResultRepository extends RepositoryBase
     {
         $rows = $this->getRowsByColumn('animalId', $id, TrialResultEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {

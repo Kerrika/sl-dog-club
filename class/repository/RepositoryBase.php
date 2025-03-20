@@ -7,7 +7,7 @@ use SunlightExtend\DogClub\Model\Entity\IEntity;
 
 abstract class RepositoryBase
 {
-    private string $dbName;
+    protected string $dbName;
 
     function __construct(string $entityName)
     {

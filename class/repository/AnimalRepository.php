@@ -2,7 +2,9 @@
 
 namespace SunlightExtend\DogClub\Repository;
 
+use Sunlight\Database\Database as DB;
 use SunlightExtend\DogClub\Model\Entity\AnimalEntity;
+use SunlightExtend\DogClub\Model\Enum\AnimalStatus;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 class AnimalRepository extends RepositoryBase
@@ -26,7 +28,7 @@ class AnimalRepository extends RepositoryBase
     {
         $rows = $this->getRowsByIds($ids, AnimalEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {
@@ -37,9 +39,33 @@ class AnimalRepository extends RepositoryBase
     }
 
     /** @return AnimalEntity[] */
+    function getByLitterId($id): array
+    {
+        return $this->getByProperty('litterId', $id);
+    }
+
+    /** @return AnimalEntity[] */
     function getApprovedByBreedId(int $id): array
     {
-        return $this->getByProperty('breedId', $id);
+        $rows = $this->getApprovedByProperty('breedId', $id);
+
+        return $this->toEntities($rows);
+    }
+
+    /** @return AnimalEntity[] */
+    function getApprovedByOwnerId(int $id): array
+    {
+        $rows = $this->getApprovedByProperty('ownerId', $id);
+
+        return $this->toEntities($rows);
+    }
+
+    /** @return AnimalEntity[] */
+    function getApprovedByProperty(string $property, int $id): array
+    {        
+        $rows = DB::queryRows('SELECT ' . AnimalEntity::getPropertyNames() . ' FROM ' . $this->dbName . ' WHERE ' . $property . DB::equal($id) . ' AND status IN (' . AnimalStatus::Approved->value . ', ' . AnimalStatus::Retired->value . ')');
+
+        return $this->toEntities($rows);
     }
 
     /** @return AnimalEntity[] */
@@ -47,7 +73,13 @@ class AnimalRepository extends RepositoryBase
     {
         $rows = $this->getRowsByColumn($property, $value, AnimalEntity::getPropertyNames());
 
-        $list = array();
+        return $this->toEntities($rows);
+    }
+
+    /** @return AnimalEntity[] */
+    private function toEntities(array $rows): array
+    {        
+        $list =[];
 
         foreach ($rows as $row)
         {

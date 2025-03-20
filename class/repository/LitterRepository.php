@@ -27,7 +27,7 @@ class LitterRepository extends RepositoryBase
     {
         $rows = $this->getRowsByIds($ids, LitterEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {
@@ -62,7 +62,7 @@ class LitterRepository extends RepositoryBase
     {
         $rows = $this->getRowsByColumn($property, $value, LitterEntity::getPropertyNames());
 
-        $list = array();
+        $list =[];
 
         foreach ($rows as $row)
         {

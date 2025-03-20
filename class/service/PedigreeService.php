@@ -15,23 +15,44 @@ readonly class PedigreeService
     {
         $this->AnimalRepository = AnimalRepository::getInstance();
     }
-    /** @return AnimalEntity[][] */
-    function getPedigree(int $id, int $generationCount): ?array
-    {
-        $pedigree = array();
 
+    /** @return AnimalEntity[][] */
+    function getPedigreeForAnimal(int $id, int $generationCount): ?array
+    {
         $animal = $this->AnimalRepository->getById($id);
-        
+
         if ($animal === null)
         {
             return null;
         }
 
-        $currentGen = [$animal];
+        return $this->getAncestors([$animal], $generationCount);
+    }
+
+    /** @return AnimalEntity[][] */
+    function getPedigreeForLitter(int $sireId, int $damId, int $generationCount): array
+    {
+        $sire = $this->AnimalRepository->getById($sireId);
+        $dam = $this->AnimalRepository->getById($damId);
+
+        $initialGeneration = [$sire, $dam];
+
+        $ancestors = $this->getAncestors($initialGeneration, $generationCount-1);
+
+        return [$initialGeneration, ...$ancestors];
+    }
+
+    /** @var AnimalEntity[] $initialGeneration */
+    /** @return AnimalEntity[][] */
+    private function getAncestors(array $initialGeneration, int $generationCount): array
+    {
+        $ancestors = [];
+
+        $currentGen = $initialGeneration;
 
         for ($i = 0; $i < $generationCount; $i++)
         {
-            $generation = array();
+            $generation = [];
 
             foreach ($currentGen as $ancestor)
             {
@@ -40,9 +61,9 @@ readonly class PedigreeService
             }
 
             $currentGen = $generation;
-            $pedigree[] = $generation;
+            $ancestors[] = $generation;
         }
 
-        return $pedigree;
+        return $ancestors;
     }
 }
