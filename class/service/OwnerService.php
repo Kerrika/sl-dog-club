@@ -48,4 +48,16 @@ readonly class OwnerService
 
         return $dto;
     }
+
+    function createOwner(OwnerDto $owner): int
+    {
+        $id = $this->ownerRepository->create($owner->owner);
+
+        return $id;
+    }
+
+    function updateOwner(OwnerDto $owner): void
+    {
+        $this->ownerRepository->update($owner->owner->id, $owner->owner);
+    }
 }

@@ -41,4 +41,16 @@ readonly class BreederService
 
         return $dto;
     }
+
+    function createBreeder(BreederDto $breeder): int
+    {
+        $id = $this->breederRepository->create($breeder->breeder);
+
+        return $id;
+    }
+
+    function updateBreeder(BreederDto $breeder): void
+    {
+        $this->breederRepository->update($breeder->breeder->id, $breeder->breeder);
+    }
 }

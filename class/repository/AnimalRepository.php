@@ -39,7 +39,7 @@ class AnimalRepository extends RepositoryBase
     }
 
     /** @return AnimalEntity[] */
-    function getByLitterId($id): array
+    function getByLitterId(int $id): array
     {
         return $this->getByProperty('litterId', $id);
     }
@@ -78,7 +78,7 @@ class AnimalRepository extends RepositoryBase
 
     /** @return AnimalEntity[] */
     private function toEntities(array $rows): array
-    {        
+    {
         $list =[];
 
         foreach ($rows as $row)

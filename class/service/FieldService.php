@@ -73,4 +73,20 @@ readonly class FieldService
 
         return $list;
     }
+
+    /** @param FieldValueDto[] */
+    function saveFieldValues(array $fieldValues): void
+    {
+        foreach ($fieldValues as $fieldValue)
+        {
+            if ($fieldValue->fieldValue->id === null)
+            {
+                $this->fieldValueRepository->create($fieldValue->fieldValue);
+            }
+            else
+            {
+                $this->fieldValueRepository->update($fieldValue->fieldValue->id, $fieldValue->fieldValue);
+            }
+        }
+    }
 }

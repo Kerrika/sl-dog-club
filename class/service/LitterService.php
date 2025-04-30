@@ -55,4 +55,16 @@ readonly class LitterService
 
         return $dto;
     }
+
+    function createLitter(LitterDto $litter): int
+    {
+        $id = $this->litterRepository->create($litter->litter);
+
+        return $id;
+    }
+
+    function updateLitter(LitterDto $litter): void
+    {
+        $this->litterRepository->update($litter->litter->id, $litter->litter);
+    }
 }

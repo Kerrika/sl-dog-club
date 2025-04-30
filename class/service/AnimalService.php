@@ -66,4 +66,22 @@ readonly class AnimalService
 
         return $dto;
     }
+
+    function createAnimal(AnimalDto $animal): int
+    {
+        $id = $this->animalRepository->create($animal->animal);
+
+        $this->fieldService->saveFieldValues($animal->additionalFields);
+        $this->trialService->saveTrialResults($animal->trialResults);
+
+        return $id;
+    }
+
+    function updateAnimal(AnimalDto $animal): void
+    {
+        $this->animalRepository->update($animal->animal->id, $animal->animal);
+        
+        $this->fieldService->saveFieldValues($animal->additionalFields);
+        $this->trialService->saveTrialResults($animal->trialResults);
+    }
 }

@@ -4,7 +4,6 @@ namespace SunlightExtend\DogClub\Repository;
 
 use SunlightExtend\DogClub\Model\Entity\BreedEntity;
 use SunlightExtend\DogClub\Model\Entity\BreederEntity;
-use SunlightExtend\DogClub\Model\Entity\OwnerEntity;
 use SunlightExtend\DogClub\Trait\SingletonTrait;
 
 class BreederRepository extends RepositoryBase

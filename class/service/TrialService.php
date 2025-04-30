@@ -45,4 +45,20 @@ readonly class TrialService
 
         return $list;
     }
+
+    /** @param TrialResultDto[] */
+    function saveTrialResults(array $trialResults): void
+    {
+        foreach ($trialResults as $trialResult)
+        {
+            if ($trialResult->trialResult->id === null)
+            {
+                $this->trialResultRepository->create($trialResult->trialResult);
+            }
+            else
+            {
+                $this->trialResultRepository->update($trialResult->trialResult->id, $trialResult->trialResult);
+            }
+        }
+    }
 }
