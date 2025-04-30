@@ -54,9 +54,7 @@ readonly class BreedService
 
     function createBreed(BreedDto $breed): int
     {
-        $id = $this->breedRepository->create($breed->breed);
-
-        return $id;
+        return $this->breedRepository->create($breed->breed);
     }
 
     function updateBreed(BreedDto $breed): void

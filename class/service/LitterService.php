@@ -58,9 +58,7 @@ readonly class LitterService
 
     function createLitter(LitterDto $litter): int
     {
-        $id = $this->litterRepository->create($litter->litter);
-
-        return $id;
+        return $this->litterRepository->create($litter->litter);
     }
 
     function updateLitter(LitterDto $litter): void
